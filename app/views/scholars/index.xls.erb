@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">Name</Data></Cell>
+        <Cell><Data ss:Type="String">Citations</Data></Cell>
+        <Cell><Data ss:Type="String">H-index</Data></Cell>
+        <Cell><Data ss:Type="String">I10-index</Data></Cell>
+        <Cell><Data ss:Type="String">Recent Citations</Data></Cell>
+        <Cell><Data ss:Type="String">Recent H-index</Data></Cell>
+        <Cell><Data ss:Type="String">Recent I10-index</Data></Cell>
+        <Cell><Data ss:Type="String">Top Venue I</Data></Cell>
+        <Cell><Data ss:Type="String">Top Venue II</Data></Cell>
+        <Cell><Data ss:Type="String">Top Venue III</Data></Cell>
+        <Cell><Data ss:Type="String">Last Updated</Data></Cell>
+      </Row>
+    <% @scholars.each do |scholar| %>
+      <Row>
+        <Cell><Data ss:Type="String"><%= scholar.name %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= scholar.citations %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= scholar.hindex %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= scholar.i10index %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= scholar.recent_citations %></sub></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= scholar.recent_hindex %></sub></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= scholar.recent_i10index %></sub></Data></Cell>
+        <Cell><Data ss:Type="String"><%= scholar.scholar_venues[0] %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= scholar.scholar_venues[1] %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= scholar.scholar_venues[2] %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= scholar.scraped_at %></Data></Cell>
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>

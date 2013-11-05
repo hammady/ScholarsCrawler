@@ -1,0 +1,14 @@
+<p>
+<%= link_to 'New scholar', new_scholar_path %>
+|
+<%= link_to 'Update all', update_all_scholars_path, method: :post %>
+</p>
+
+<p>
+  Download:
+  <%= link_to "XML", scholars_path(format: "xml") %> |
+  <%= link_to "JSON", scholars_path(format: "json") %> |
+  <%= link_to "CSV", scholars_path(format: "csv") %> |
+  <%= link_to "Excel", scholars_path(format: "xls") %>
+</p>
+

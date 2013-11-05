@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  id: 
+  name: MyString
+  google_scholar_id: MyString
+  citations: 1
+  recent_citations: 1
+  hindex: 1
+  recent_hindex: 1
+  i10index: 1
+  recent_i10index: 1
+
+two:
+  id: 
+  name: MyString
+  google_scholar_id: MyString
+  citations: 1
+  recent_citations: 1
+  hindex: 1
+  recent_hindex: 1
+  i10index: 1
+  recent_i10index: 1

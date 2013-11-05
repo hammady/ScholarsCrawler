@@ -1,0 +1,54 @@
+<h1>Listing Scholars</h1>
+
+<%= render partial: 'header_footer' %>
+
+<table border=1 cellspacing="0" cellpadding="5">
+  <tbody>
+    <tr style="font-weight: bold; text-align: center; background-color: silver">
+      <td>Name</td>
+      
+      <td>Current Position</td>
+      <td>PhD</td>
+      <td>Last Institution</td>
+      <td>Last Job</td>
+      
+      <td>Citations</td>
+      <td>H-index</td>
+      <td>I10-index</td>
+      <td>Recent Citations</td>
+      <td>Recent H-index</td>
+      <td>Recent I10-index</td>
+      
+      <td>Top Venue I</td>
+      <td>Top Venue II</td>
+      <td>Top Venue III</td>
+      <td>Last Updated</td>
+    </tr>
+
+<% @scholars.each do |scholar| %>
+    <tr>
+      <td><%= link_to scholar, scholar_path(scholar) %></td>
+
+      <td><%= scholar.current_position %></td>
+      <td><%= scholar.phd %></td>
+      <td><%= scholar.last_institution %></td>
+      <td><%= scholar.last_job %></td>
+
+      <td><%= scholar.citations %></td>
+      <td><%= scholar.hindex %></td>
+      <td><%= scholar.i10index %></td>
+      <td><%= scholar.recent_citations %> <i><sub><%= since(scholar) %></sub></i></td>
+      <td><%= scholar.recent_hindex %> <i><sub><%= since(scholar) %></sub></i></td>
+      <td><%= scholar.recent_i10index %> <i><sub><%= since(scholar) %></sub></i></td>
+      
+      <td><%= scholar.scholar_venues[0] %></td>
+      <td><%= scholar.scholar_venues[1] %></td>
+      <td><%= scholar.scholar_venues[2] %></td>
+      <td><%= scholar.scraped_at %></td>
+    </tr>
+<% end %>
+
+  </tbody>
+</table>
+
+<%= render partial: 'header_footer' %>

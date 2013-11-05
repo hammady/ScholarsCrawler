@@ -1,0 +1,31 @@
+<%= form_for(@scholar) do |f| %>
+  <p>
+    <%= f.label :google_scholar_key %>:
+    <%= f.text_field :google_scholar_id, :size => 30 %>
+  </p>
+  <p>
+    <%= f.label :dblp_author_name %>:
+    <%= f.text_field :dblp_author_id, :size => 30 %>
+  </p>
+  <p>
+    <%= f.label :current_position %>:
+    <%= f.text_field :current_position %>
+  </p>
+  <p>
+    <%= f.label :phd_from %>:
+    <%= f.text_field :phd_from %>
+  </p>
+  <p>
+    <%= f.label :phd_year %>:
+    <%= f.text_field :phd_year %>
+  </p>
+  <p>
+    <%= f.label :last_institution %>:
+    <%= f.text_field :last_institution %>
+  </p>
+  <p>
+    <%= f.label :last_job %>:
+    <%= f.text_field :last_job %>
+  </p>
+  <%= f.submit "Save & Search" %>
+<% end %>
