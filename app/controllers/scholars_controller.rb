@@ -46,8 +46,8 @@ class ScholarsController < ApplicationController
   end
 
   def update_all
-    Scholar.update_all
-    redirect_to scholars_url, :notice => "Scholars updated successfully"
+    Scholar.delay.update_all
+    redirect_to scholars_url, :notice => "Scholars update all started successfully, check back in a while"
   end
 
   protected

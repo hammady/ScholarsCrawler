@@ -11,7 +11,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131105093641) do
+ActiveRecord::Schema.define(:version => 20141028111654) do
+
+  create_table "delayed_jobs", :force => true do |t|
+    t.integer  "priority",   :default => 0, :null => false
+    t.integer  "attempts",   :default => 0, :null => false
+    t.text     "handler",                   :null => false
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
 
   create_table "scholar_venues", :force => true do |t|
     t.integer "scholar_id"
@@ -20,23 +36,23 @@ ActiveRecord::Schema.define(:version => 20131105093641) do
   end
 
   create_table "scholars", :force => true do |t|
-    t.string    "name"
-    t.string    "google_scholar_id"
-    t.integer   "citations"
-    t.integer   "recent_citations"
-    t.integer   "hindex"
-    t.integer   "recent_hindex"
-    t.integer   "i10index"
-    t.integer   "recent_i10index"
-    t.timestamp "created_at",        :null => false
-    t.timestamp "updated_at",        :null => false
-    t.string    "dblp_author_id"
-    t.timestamp "scraped_at"
-    t.string    "current_position"
-    t.string    "phd_from"
-    t.integer   "phd_year"
-    t.string    "last_institution"
-    t.string    "last_job"
+    t.string   "name"
+    t.string   "google_scholar_id"
+    t.integer  "citations"
+    t.integer  "recent_citations"
+    t.integer  "hindex"
+    t.integer  "recent_hindex"
+    t.integer  "i10index"
+    t.integer  "recent_i10index"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.string   "dblp_author_id"
+    t.datetime "scraped_at"
+    t.string   "current_position"
+    t.string   "phd_from"
+    t.integer  "phd_year"
+    t.string   "last_institution"
+    t.string   "last_job"
   end
 
   create_table "users", :force => true do |t|
@@ -58,9 +74,9 @@ ActiveRecord::Schema.define(:version => 20131105093641) do
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
   create_table "venues", :force => true do |t|
-    t.string    "name"
-    t.timestamp "created_at", :null => false
-    t.timestamp "updated_at", :null => false
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
 end

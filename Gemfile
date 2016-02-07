@@ -29,7 +29,8 @@ gem 'jquery-rails'
 # gem 'jbuilder'
 
 # Use unicorn as the app server
-# gem 'unicorn'
+gem 'unicorn'
+gem 'foreman'
 
 # Deploy with Capistrano
 # gem 'capistrano'
@@ -40,3 +41,5 @@ gem 'jquery-rails'
 gem 'typhoeus'
 gem 'nokogiri'
 gem 'devise'
+gem 'delayed_job_active_record'
+

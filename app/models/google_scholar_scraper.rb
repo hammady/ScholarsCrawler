@@ -19,28 +19,31 @@ class GoogleScholarScraper < ScraperBase
   def process_google_scholar_citations(url, response, mScholar)
     xml = Nokogiri::HTML.parse(response, url)
 
-    name = ScraperBase.node_text xml, './/span[@id="cit-name-display"]'
+    name = ScraperBase.node_text xml, ".//div[@id='gsc_prf_in']"
     @logger.debug("Found profile with name: #{name}")
     return nil if name.blank?
 
     mScholar.name = name
-    (xml/'//table[@id="stats"]//tr').each do |tr|
-      td_caption = tr.at('./td[@class="cit-caption"]')
-      #@logger.debug "td_caption is #{td_caption.class} #{td_caption}"
-      td_data = td_caption.next_sibling
-      case td_caption.text
-      when 'Citations'
-        mScholar.citations = td_data.text
-        mScholar.recent_citations = td_data.next_sibling.text
-        #@logger.debug("Citations: #{mScholar.citations}, #{mScholar.recent_citations}")
-      when 'h-index'
-        mScholar.hindex = td_data.text
-        mScholar.recent_hindex = td_data.next_sibling.text
-        #@logger.debug("h-index: #{mScholar.hindex}, #{mScholar.recent_hindex}")
-      when 'i10-index'
-        mScholar.i10index = td_data.text
-        mScholar.recent_i10index = td_data.next_sibling.text
-        #@logger.debug("i10-index: #{mScholar.i10index}, #{mScholar.recent_i10index}")
+    (xml/"//table[@id='gsc_rsb_st']//tr").each do |tr|
+      @logger.debug("Inspecting tr: #{tr.class} #{tr}")
+      td_caption = tr.at("./td[@class='gsc_rsb_sc1']")
+      @logger.debug "td_caption is #{td_caption.class} #{td_caption}"
+      unless td_caption.nil?
+        td_data = td_caption.next_sibling
+        case td_caption.text
+        when 'Citations'
+          mScholar.citations = td_data.text
+          mScholar.recent_citations = td_data.next_sibling.text
+          @logger.debug("Citations: #{mScholar.citations}, #{mScholar.recent_citations}")
+        when 'h-index'
+          mScholar.hindex = td_data.text
+          mScholar.recent_hindex = td_data.next_sibling.text
+          @logger.debug("h-index: #{mScholar.hindex}, #{mScholar.recent_hindex}")
+        when 'i10-index'
+          mScholar.i10index = td_data.text
+          mScholar.recent_i10index = td_data.next_sibling.text
+          @logger.debug("i10-index: #{mScholar.i10index}, #{mScholar.recent_i10index}")
+        end
       end
     end
 
@@ -75,7 +78,7 @@ class GoogleScholarScraper < ScraperBase
           unless count.start_with? "More"
             count = count.match(/\(([0-9]+)\)/)[1].to_i
             venue = ScraperBase.node_text detail_span, './a'
-            #@logger.debug("Found venue #{venue} count #{count}")
+            @logger.debug("Found venue #{venue} count #{count}")
             mVenue = Venue.find_or_create_by_name venue
             mScholar.scholar_venues.build venue_id: mVenue.id, count: count
           end

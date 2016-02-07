@@ -9,18 +9,13 @@ class ScraperBase
     #@max_parallel_articles = 20
     @max_parallel_articles = 50
     @max_hydra_queue_length = 200
-    #require 'fiber'
-
-		#@agent = Mechanize.new
-		#@agent.user_agent_alias = 'Linux Mozilla' #'Windows IE 6'
-		## disable history to prevent infinitely growing memory!
-		#@agent.history.max_size=0
 
     @hydra_articles = Typhoeus::Hydra.new(:max_concurrency => @max_parallel_articles)
 
-    log_file = Rails.root.join(ENV['WRITABLE_DIR']).join(log_file)
-		@logger = Logger.new(log_file, 'daily') 
-		@logger.level = Logger::DEBUG
+    @logger = Logger.new(STDOUT)
+    @logger.level = Rails.logger.level
+    @logger.progname = log_file # TODO: this doesn't work, need to figure out why
+
     @stop_on_seen_page = true
     @content_dir = Rails.root.join(ENV['WRITABLE_DIR']).join(content_dir)
     Dir.mkdir(@content_dir) unless File.directory?(@content_dir)
