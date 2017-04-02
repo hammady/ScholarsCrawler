@@ -1,8 +1,8 @@
-# QcriScholars
-A Rails web application to crawl for QCRI scholars citation rankings and present them in web table view.
+# ScholarsCrawler
+A Rails web application to crawl for scholars citation rankings and present them in web table view.
 
 # Build
-Install Ruby (1.8+) first then get all dependancies using:
+Install Ruby (1.8+) first then get all dependencies using:
 
     gem install bundler
     bundle install
